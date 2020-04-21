@@ -41,17 +41,21 @@ export default class App extends React.Component {
 
     return signedIn ? (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SignUp" component={LoginScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    ) : (
-      <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Home" component={LoginScreen} />
           <Tab.Screen name="Profile" component={LoginScreen} />
         </Tab.Navigator>
+      </NavigationContainer>
+    ) : (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="SignUp" component={LoginScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }
