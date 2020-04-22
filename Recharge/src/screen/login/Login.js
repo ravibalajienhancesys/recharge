@@ -16,6 +16,7 @@ import {responsiveFontSize} from 'react-native-responsive-dimensions';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../component/Loader';
+import {navigate} from './../../../App';
 
 const dimensions = Dimensions.get('window');
 
@@ -23,10 +24,6 @@ const INPUT_HEIGHT = 40;
 const INPUT_WIDTH = '97.8%';
 
 export default class Login extends Component {
-  static propTypes = {
-    navigation: PropTypes.object,
-  };
-
   constructor(props) {
     super(props);
 
@@ -61,14 +58,12 @@ export default class Login extends Component {
   };
 
   _handlingForgotpassword = () => {
-    this.props.navigation.navigate('ForgotPassword', {
-      selectedCountry: global.country,
-    });
+    navigation.navigate('ForgotPassword');
   };
 
   _SignIn = () => {
     if (this.state.username.length == 0 || this.state.password.length == 0) {
-      this.showAlert('Error');
+      alert('Error');
       return;
     }
   };
@@ -289,8 +284,8 @@ export default class Login extends Component {
             <View style={styles.forgotView}>
               <TouchableOpacity
                 style={[styles.forgot]}
-                onPress={this._handlingForgotpassword}>
-                <Text style={[styles.forgotText]}>ForgotPassword</Text>
+                onPress={() => navigate('ForgotPassword')}>
+                <Text style={[styles.forgotText]}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -340,7 +335,7 @@ export default class Login extends Component {
               width: '100%',
             }}>
             <Text style={[styles.termsNcondition]}>
-              By creating an account or logging in, you agree to FreshonTable
+              By creating an account or logging in, you agree to Recharge
               <Text> </Text>
               <Text
                 style={[styles.termsNconditionLink]}

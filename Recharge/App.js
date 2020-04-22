@@ -5,15 +5,22 @@
  * @format
  * @flow strict-local
  */
-import React from 'react';
+import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {isSignedIn} from './src/component/Authentication';
 import LoginScreen from './src/screen/login/Login';
+import ForgotPassword from './src/screen/login/ForgotPassword';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+const navigationRef = React.createRef();
+
+export function navigate(name) {
+  navigationRef.current && navigationRef.current.navigate(name);
+}
 
 export default class App extends React.Component {
   constructor(props) {
@@ -47,14 +54,14 @@ export default class App extends React.Component {
         </Tab.Navigator>
       </NavigationContainer>
     ) : (
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator>
           <Stack.Screen
             name="Login"
             component={LoginScreen}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="SignUp" component={LoginScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         </Stack.Navigator>
       </NavigationContainer>
     );
